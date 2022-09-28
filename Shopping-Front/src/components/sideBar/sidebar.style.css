@@ -1,3 +1,33 @@
-div {
-    background-color: aqua;
+.container {
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    width: 5%;
+    height: 100vh;
+    position: fixed;
+    padding: 2rem 0;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+}
+
+.icon-button {
+    position: relative;
+}
+
+.icon-button::before {
+    content: "";
+    width: 5px;
+    background-color: #F9A109;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    border-radius: 0px 4px 4px 0px;
 }
