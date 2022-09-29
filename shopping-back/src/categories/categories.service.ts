@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -12,8 +16,14 @@ export class CategoriesService {
     private categoryModel: Model<Category>,
   ) {}
 
-  create(createCategoryDto: CreateCategoryDto) {
-    return 'This action adds a new category';
+  async create(createCategoryDto: CreateCategoryDto) {
+    createCategoryDto.name = createCategoryDto.name.toLowerCase();
+    try {
+      const category = await this.categoryModel.create(createCategoryDto);
+      return category;
+    } catch (error) {
+      this.handleException(error);
+    }
   }
 
   findAll() {
@@ -24,11 +34,36 @@ export class CategoriesService {
     return `This action returns a #${id} category`;
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
+  async findByName(name: string) {
+    name = name.toLowerCase();
+    try {
+      const category = await this.categoryModel.findOne({ name });
+      if (!category) {
+        throw new NotFoundException(`No existe la categoría ${name}`);
+      }
+      return category;
+    } catch (error) {
+      this.handleException(error);
+    }
+  }
+
+  update(id: string, updateCategoryDto: UpdateCategoryDto) {
     return `This action updates a #${id} category`;
   }
 
   remove(id: number) {
     return `This action removes a #${id} category`;
+  }
+
+  private handleException(error: any) {
+    if (error.code === 11000) {
+      throw new InternalServerErrorException(
+        `Ya existe una categoría con el nombre ${error.keyValue.name}`,
+      );
+    }
+    if (error.status === 404) {
+      throw new NotFoundException(error.message);
+    }
+    throw new InternalServerErrorException(error);
   }
 }

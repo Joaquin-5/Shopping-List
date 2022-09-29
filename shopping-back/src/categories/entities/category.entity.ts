@@ -2,7 +2,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Category {
-  @Prop()
+  @Prop({
+    required: true,
+    unique: true,
+    index: true,
+  })
   name: string;
 }
 

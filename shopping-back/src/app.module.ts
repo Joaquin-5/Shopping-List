@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ItemsModule } from './items/items.module';
 import { CategoriesModule } from './categories/categories.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CategoriesModule } from './categories/categories.module';
     MongooseModule.forRoot(process.env.MONGO_URI),
     ItemsModule,
     CategoriesModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
