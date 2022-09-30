@@ -17,7 +17,7 @@ export class ItemsService {
   ) {}
 
   async create(createItemDto: CreateItemDto) {
-    createItemDto.name = createItemDto.name.toLowerCase();
+    createItemDto.name = createItemDto.name.toLowerCase().trim();
     try {
       const item = await this.itemModel.create(createItemDto);
       return item;
@@ -35,8 +35,10 @@ export class ItemsService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} item`;
+  async findOne(id: string) {
+    const item = await this.itemModel.findById(id).populate('category');
+    if (!item) throw new NotFoundException(`No se encontró el item ${id}`);
+    return item;
   }
 
   async findByName(name: string) {
@@ -50,8 +52,20 @@ export class ItemsService {
     }
   }
 
-  update(id: number, updateItemDto: UpdateItemDto) {
-    return `This action updates a #${id} item`;
+  async update(id: string, updateItemDto: UpdateItemDto) {
+    updateItemDto.name = updateItemDto.name.toLowerCase().trim();
+    const item = await this.itemModel.findById(id);
+    if (!item) throw new NotFoundException(`No se encontró el item ${id}`);
+    try {
+      const updatedItem = await this.itemModel.findByIdAndUpdate(
+        id,
+        updateItemDto,
+        { new: true },
+      );
+      return updatedItem;
+    } catch (error) {
+      this.handleException(error);
+    }
   }
 
   async remove(id: string) {

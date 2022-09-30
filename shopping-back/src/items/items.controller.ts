@@ -27,8 +27,8 @@ export class ItemsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemsService.findOne(+id);
+  findOne(@Param('id', ParseMongoIdPipe) id: string) {
+    return this.itemsService.findOne(id);
   }
 
   @Get('name/:name')
@@ -37,8 +37,11 @@ export class ItemsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
-    return this.itemsService.update(+id, updateItemDto);
+  update(
+    @Param('id', ParseMongoIdPipe) id: string,
+    @Body() updateItemDto: UpdateItemDto,
+  ) {
+    return this.itemsService.update(id, updateItemDto);
   }
 
   @Delete(':id')
