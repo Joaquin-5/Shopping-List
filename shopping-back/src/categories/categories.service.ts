@@ -30,8 +30,16 @@ export class CategoriesService {
     return this.categoryModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(id: string) {
+    try {
+      const category = await this.categoryModel.findById(id);
+      if (!category) {
+        throw new NotFoundException(`No existe la categoría ${id}`);
+      }
+      return category;
+    } catch (error) {
+      this.handleException(error);
+    }
   }
 
   async findByName(name: string) {
@@ -51,7 +59,7 @@ export class CategoriesService {
     return `This action updates a #${id} category`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} category`;
   }
 
