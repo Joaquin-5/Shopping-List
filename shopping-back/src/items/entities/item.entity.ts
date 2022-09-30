@@ -17,10 +17,16 @@ export class Item extends Document {
   })
   category: Category;
 
-  @Prop()
+  @Prop({
+    required: false,
+    default: '',
+  })
   note: string;
 
-  @Prop()
+  @Prop({
+    required: false,
+    default: null,
+  })
   image: string;
 }
 

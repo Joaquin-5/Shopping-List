@@ -16,8 +16,14 @@ export class ItemsService {
     private readonly itemModel: Model<Item>,
   ) {}
 
-  create(createItemDto: CreateItemDto) {
-    return 'This action adds a new item';
+  async create(createItemDto: CreateItemDto) {
+    createItemDto.name = createItemDto.name.toLowerCase();
+    try {
+      const item = await this.itemModel.create(createItemDto);
+      return item;
+    } catch (error) {
+      this.handleException(error);
+    }
   }
 
   async findAll() {
