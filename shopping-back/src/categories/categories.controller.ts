@@ -27,8 +27,8 @@ export class CategoriesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.categoriesService.findOne(+id);
+  findOne(@Param('id', ParseMongoIdPipe) id: string) {
+    return this.categoriesService.findOne(id);
   }
 
   @Get('name/:name')
@@ -45,7 +45,7 @@ export class CategoriesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoriesService.remove(+id);
+  remove(@Param('id', ParseMongoIdPipe) id: string) {
+    return this.categoriesService.remove(id);
   }
 }
