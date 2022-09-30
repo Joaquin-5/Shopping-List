@@ -13,7 +13,7 @@ import { Category } from './entities/category.entity';
 export class CategoriesService {
   constructor(
     @InjectModel(Category.name)
-    private categoryModel: Model<Category>,
+    private readonly categoryModel: Model<Category>,
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
