@@ -55,12 +55,33 @@ export class CategoriesService {
     }
   }
 
-  update(id: string, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: string, updateCategoryDto: UpdateCategoryDto) {
+    updateCategoryDto.name = updateCategoryDto.name.toLowerCase().trim();
+    try {
+      const category = await this.categoryModel.findByIdAndUpdate(
+        id,
+        updateCategoryDto,
+        { new: true },
+      );
+      if (!category) {
+        throw new NotFoundException(`No existe la categoría ${id}`);
+      }
+      return category;
+    } catch (error) {
+      this.handleException(error);
+    }
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} category`;
+  async remove(id: string) {
+    try {
+      const category = await this.categoryModel.findByIdAndDelete(id);
+      if (!category) {
+        throw new NotFoundException(`No existe la categoría ${id}`);
+      }
+      return category;
+    } catch (error) {
+      this.handleException(error);
+    }
   }
 
   private handleException(error: any) {
