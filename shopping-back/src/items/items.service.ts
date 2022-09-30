@@ -39,12 +39,29 @@ export class ItemsService {
     return `This action returns a #${id} item`;
   }
 
+  async findByName(name: string) {
+    name = name.toLowerCase();
+    try {
+      const item = await this.itemModel.findOne({ name }).populate('category');
+      if (!item) throw new NotFoundException(`No se encontró el item ${name}`);
+      return item;
+    } catch (error) {
+      this.handleException(error);
+    }
+  }
+
   update(id: number, updateItemDto: UpdateItemDto) {
     return `This action updates a #${id} item`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} item`;
+  async remove(id: string) {
+    try {
+      const item = await this.itemModel.findByIdAndDelete(id);
+      if (!item) throw new NotFoundException(`No se encontró el item ${id}`);
+      return item;
+    } catch (error) {
+      this.handleException(error);
+    }
   }
 
   private handleException(error: any) {

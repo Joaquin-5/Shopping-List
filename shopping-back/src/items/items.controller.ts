@@ -10,6 +10,7 @@ import {
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
+import { ParseMongoIdPipe } from '../common/pipes/parse-mongo-id.pipe';
 
 @Controller('items')
 export class ItemsController {
@@ -30,13 +31,18 @@ export class ItemsController {
     return this.itemsService.findOne(+id);
   }
 
+  @Get('name/:name')
+  findByName(@Param('name') name: string) {
+    return this.itemsService.findByName(name);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
     return this.itemsService.update(+id, updateItemDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itemsService.remove(+id);
+  remove(@Param('id', ParseMongoIdPipe) id: string) {
+    return this.itemsService.remove(id);
   }
 }
