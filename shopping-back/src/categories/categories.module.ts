@@ -4,6 +4,7 @@ import { CategoriesController } from './categories.controller';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Category, CategorySchema } from './entities/category.entity';
+import { ItemsModule } from '../items/items.module';
 
 @Module({
   controllers: [CategoriesController],
@@ -16,6 +17,7 @@ import { Category, CategorySchema } from './entities/category.entity';
         schema: CategorySchema,
       },
     ]),
+    ItemsModule,
   ],
 })
 export class CategoriesModule {}

@@ -15,5 +15,6 @@ import { Item, ItemSchema } from './entities/item.entity';
       },
     ]),
   ],
+  exports: [ItemsService, MongooseModule],
 })
 export class ItemsModule {}

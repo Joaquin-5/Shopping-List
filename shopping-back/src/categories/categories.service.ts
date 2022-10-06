@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Item } from 'src/items/entities/item.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
@@ -14,6 +15,9 @@ export class CategoriesService {
   constructor(
     @InjectModel(Category.name)
     private readonly categoryModel: Model<Category>,
+
+    @InjectModel(Item.name)
+    private readonly itemModel: Model<Item>,
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
@@ -26,8 +30,22 @@ export class CategoriesService {
     }
   }
 
-  findAll() {
-    return this.categoryModel.find();
+  async findAll() {
+    const Categories = await this.categoryModel.find();
+    const itemsByCategory = await this.itemModel.aggregate([
+      {
+        $group: {
+          _id: '$category',
+          items: { $push: '$$ROOT' },
+        },
+      },
+    ]);
+    return Categories.map((category) => {
+      const items = itemsByCategory.find(
+        (item) => item._id.toString() === category._id.toString(),
+      );
+      return { ...category.toObject(), items: items ? items.items : [] };
+    });
   }
 
   async findOne(id: string) {
