@@ -1,0 +1,124 @@
+.cart-container {
+    background-color: #FFF0DE;
+    padding: .1px;
+    padding-left: 20%;
+    height: 100vh;
+    overflow-y: scroll;
+    max-height: 100vh;
+}
+
+.additem-container {
+    background-color: #80485B;
+    margin: 10% 5%;
+    border-radius: 24px;
+    display: flex;
+    padding: 1rem .5rem;
+    position: relative;
+}
+
+.info-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+}
+
+
+.titulo-secundario {
+    margin: 0;
+    color: #FFFFFF;
+}
+
+.image-container img {
+    position: relative;
+    top: -35px;
+    left: -10px;
+} 
+
+.item-container {
+    padding-left: 1.25rem;
+}
+
+.item-container h1 {
+    font-size: 1.5rem;
+}
+
+.item-container h2 {
+    font-size: .875rem;
+    color: #828282;
+    font-weight: 500;
+}
+
+.item-list {
+    margin-top: 2.4rem;
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1rem;
+}
+
+.item-title {
+    font-size: .875rem;
+    font-weight: 700;
+}
+
+.item button {
+    border: 2px solid #F9A109;
+    border-radius: 24px;
+    background-color: transparent;
+    color: #F9A109;
+    height: 32px;
+    width: 68px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.search-container {
+    width: 100%;
+    background-color: #FFFFFF;
+    padding: 2.1rem 1rem;
+    position: sticky;
+    bottom: 0;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid #F9A109;
+    border-radius: 12px;
+    width: 100%;
+    height: 61px;
+    align-items: center;
+    overflow: hidden;
+}
+
+.input-text {
+    height: 80%;
+    border: none;
+    padding-left: 1rem;
+    width: 150px;
+    outline: none;
+}
+
+.input-text::placeholder {
+    color: #BDBDBDed;
+    font-family: 'Quicksand';
+}
+
+.input-submit {
+    background-color: #F9A109;
+    height: 100%;
+    width: 87px;
+    border: none;
+    /* border-radius: 10px; */
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-family: 'Quicksand';
+}

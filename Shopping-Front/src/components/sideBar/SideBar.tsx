@@ -29,8 +29,8 @@ export const SideBar = () => {
             </IconButton>
           </Tooltip>
         </div>
-        <IconButton>
-          <Badge badgeContent={4} color="secondary">
+        <IconButton sx={{backgroundColor: '#F9A109', color: '#FFFFFF', '&:hover': {opacity: 1, backgroundColor: '#F9A109'}}}>
+          <Badge badgeContent={4} color="error">
             <ShoppingCartOutlinedIcon/>
           </Badge>
         </IconButton>
