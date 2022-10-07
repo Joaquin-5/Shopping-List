@@ -40,12 +40,19 @@ export class CategoriesService {
         },
       },
     ]);
-    return Categories.map((category) => {
-      const items = itemsByCategory.find(
-        (item) => item._id.toString() === category._id.toString(),
-      );
-      return { ...category.toObject(), items: items ? items.items : [] };
-    });
+    return Categories.sort((a, b) => a.name.localeCompare(b.name)).map(
+      (category) => {
+        const items = itemsByCategory.find(
+          (item) => item._id.toString() === category._id.toString(),
+        );
+        const { _id, name } = category;
+        return { _id, name, items: items?.items || [] };
+        // return {
+        //   ...category.toObject(),
+        //   items: items ? items.items : [],
+        // };
+      },
+    );
   }
 
   async findOne(id: string) {
