@@ -19,5 +19,6 @@ import { ItemsModule } from '../items/items.module';
     ]),
     ItemsModule,
   ],
+  exports: [CategoriesService, MongooseModule],
 })
 export class CategoriesModule {}
