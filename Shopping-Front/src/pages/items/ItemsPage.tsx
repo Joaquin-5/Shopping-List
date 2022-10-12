@@ -1,17 +1,21 @@
+import React from 'react'
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { shoppingApi } from "../../api";
 import { Cart } from "../../components/cart";
 import { ItemButton } from "../../components/itemButton";
 import { SideBar } from "../../components/sideBar/SideBar";
-import { Item } from "../../interfaces";
+import { Category, Item } from "../../interfaces";
+import { RootState } from "../../store";
 
 export const ItemsPage = () => {
-  const [items, setItems] = useState<Item[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const {showCart} = useSelector((state: RootState) => state.ui)
 
   useEffect(() => {
-    shoppingApi.get('items').then(res => {
-      setItems(res.data);
+    shoppingApi.get('categories').then(res => {
+      setCategories(res.data);
     })
   }, [])
   
@@ -19,15 +23,19 @@ export const ItemsPage = () => {
   return (
     <div style={{ paddingTop: ".1px" }}>
       <SideBar />
-      <Cart />
+      {showCart && <Cart />}
       {/* <div style={{height: '200vh', paddingLeft: '5%'}}><h1>Shoppingify allows you take your shopping list wherever you go</h1></div> */}
       <div style={{ paddingLeft: "25%" }}>
-        <h2>Fruit and vegetables</h2>
-        <Box gap='1.5rem .53rem' display='flex' flexWrap='wrap'>
-          {items.map(c => (
-            <ItemButton key={c._id} text={c.name} onClick={() => console.log('hola')} icon={true}/>
-          ))}
-        </Box>
+        {categories.map(c => (
+          <React.Fragment key={c._id}>
+            <h2>{c.name}</h2>
+            <Box gap='1.5rem .53rem' display='flex' flexWrap='wrap'>
+            {c.items.map(i => (
+              <ItemButton key={i._id} text={i.name} onClick={() => console.log('hola')} icon={true}/>
+            ))}
+          </Box>
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );

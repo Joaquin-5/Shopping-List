@@ -1,5 +1,9 @@
+import AddIcon from "@mui/icons-material/Add";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { ItemButton } from "../itemButton";
 import "./cart.styles.css";
+import { QuantityButton } from "./quantityButton";
 
 export const Cart = () => {
   return (
@@ -23,52 +27,56 @@ export const Cart = () => {
           <h2>Fruit and vegetables</h2>
           <div className="item">
             <p className="item-title">Acocado</p>
-            <button>3 pcs</button>
+            <QuantityButton quantity={4}/>
           </div>
           <div className="item">
             <p className="item-title">Pre-cooked corn 450g</p>
-            <button>3 pcs</button>
+            <QuantityButton quantity={4} />
           </div>
         </div>
         <div className="item-list">
           <h2>Meat and Fish</h2>
           <div className="item">
             <p className="item-title">Chicken 1kg </p>
-            <button>3 pcs</button>
+            <QuantityButton quantity={4} />
           </div>
           <div className="item">
             <p className="item-title">Pork fillets 450g</p>
-            <button>3 pcs</button>
+            <QuantityButton quantity={4} />
           </div>
         </div>
         <div className="item-list">
           <h2>Meat and Fish</h2>
           <div className="item">
             <p className="item-title">Chicken 1kg </p>
-            <button>3 pcs</button>
+            <QuantityButton quantity={4} />
           </div>
           <div className="item">
             <p className="item-title">Pork fillets 450g</p>
-            <button>3 pcs</button>
+            <QuantityButton quantity={4} />
           </div>
         </div>
         <div className="item-list">
           <h2>Meat and Fish</h2>
           <div className="item">
             <p className="item-title">Chicken 1kg </p>
-            <button>3 pcs</button>
+            <button className="button_quantity">3 pcs</button>
           </div>
           <div className="item">
             <p className="item-title">Pork fillets 450g</p>
-            <button>3 pcs</button>
+            <button className="button_quantity">3 pcs</button>
           </div>
         </div>
       </div>
       <div className="search-container">
         <div className="input-container">
-          <input type="text" className="input-text" placeholder="Enter a name"/>  
-          <input type="submit" value="Save" className="input-submit"/> 
-        </div> 
+          <input
+            type="text"
+            className="input-text"
+            placeholder="Enter a name"
+          />
+          <input type="submit" value="Save" className="input-submit" />
+        </div>
       </div>
     </div>
   );

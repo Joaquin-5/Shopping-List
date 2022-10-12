@@ -1,0 +1,31 @@
+.button_quantity-container {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.button_quantity {
+    border: 2px solid #F9A109;
+    border-radius: 24px;
+    background-color: transparent;
+    color: #F9A109;
+    height: 32px;
+    width: 68px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.delete {
+    border-radius: 12px;
+    color: #FFFFFF;
+    border: none;
+    background-color: #F9A109;
+    padding: .5rem;
+}
+
+.addOrLess {
+    border: none;
+    background-color: transparent;
+    color: #F9A109;
+}
