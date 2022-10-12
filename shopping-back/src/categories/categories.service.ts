@@ -61,7 +61,10 @@ export class CategoriesService {
       if (!category) {
         throw new NotFoundException(`No existe la categoría ${id}`);
       }
-      return category;
+      // return category with items
+      const items = await this.itemModel.find({ category: id });
+      const { _id, name } = category;
+      return { _id, name, items: items || [] };
     } catch (error) {
       this.handleException(error);
     }
