@@ -37,7 +37,10 @@ export const ItemsPage = () => {
                   text={i.name}
                   onClick={() =>
                     dispatch(
-                      addItem({category: c, item: i})
+                      addItem({
+                        category: c,
+                        item: { ...i, category: { _id: c._id, name: c.name } },
+                      })
                     )
                   }
                   icon={true}

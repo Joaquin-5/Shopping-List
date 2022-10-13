@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.button_quantity, .delete, .addOrLess {
+    cursor: pointer;
+}
+
 .button_quantity {
     border: 2px solid #F9A109;
     border-radius: 24px;

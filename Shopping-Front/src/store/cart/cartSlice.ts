@@ -1,14 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ItemButton } from "../../components/itemButton";
-import { Category, Item, ShopCartCategory, ShopCartItem } from "../../interfaces";
+import {
+  Category,
+  Item,
+  ShopCartCategory,
+  ShopCartItem,
+} from "../../interfaces";
 
 export interface CartState {
   items: ShopCartCategory[];
 }
 
 interface AddItemAction {
-  category: Category,
-  item: Item
+  category: Category;
+  item: Item;
 }
 
 const initialState: CartState = {
@@ -46,23 +51,30 @@ export const cartSlice = createSlice({
           ],
         });
       }
-    }
-    /* addItem: (state, action: PayloadAction<Item>) => {
-      console.log(action.payload);
-      const existingItem = state.items.find(
-        (item) => item._id === action.payload._id
+    },
+    editQuantityItem: (state, action: PayloadAction<ShopCartItem>) => {
+      const category = state.items.find(
+        (c) => c._id === action.payload.category._id
       );
-      if (existingItem) {
-        existingItem.quantity++;
-      } else {
-        state.items.push({
-          ...action.payload,
-          quantity: 1,
-        });
+      if (category) {
+        const item = category.items.find((i) => i._id === action.payload._id);
+        if (item) {
+          item.quantity = action.payload.quantity;
+        }
       }
-      // state.items.push(action.payload);
-    }, */
+    },
+    deleteItemCart: (state, action: PayloadAction<ShopCartItem>) => {
+      const category = state.items.find(
+        (c) => c._id === action.payload.category._id
+      );
+      if (category) {
+        const item = category.items.find((i) => i._id === action.payload._id);
+        if (item) {
+          category.items = category.items.filter(i => i._id !== action.payload._id);
+        }
+      }
+    },
   },
 });
 
-export const { addItem } = cartSlice.actions;
+export const { addItem, editQuantityItem, deleteItemCart } = cartSlice.actions;

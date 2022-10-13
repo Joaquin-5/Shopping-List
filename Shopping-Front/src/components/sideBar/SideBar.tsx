@@ -12,7 +12,8 @@ import "./sidebar.style.css";
 
 export const SideBar = () => {
   const dispatch = useDispatch();
-  const {showCart} = useSelector((state: RootState) => state.ui)
+  const { showCart } = useSelector((state: RootState) => state.ui);
+  const { items } = useSelector((state: RootState) => state.cart);
 
   return (
     <>
@@ -43,7 +44,12 @@ export const SideBar = () => {
           }}
           onClick={() => dispatch(changeState(!showCart))}
         >
-          <Badge badgeContent={4} color="error">
+          <Badge
+            badgeContent={items
+              .map((category) => category.items.length)
+              .reduce((a, b) => a + b, 0)}
+            color="error"
+          >
             <ShoppingCartOutlinedIcon />
           </Badge>
         </IconButton>

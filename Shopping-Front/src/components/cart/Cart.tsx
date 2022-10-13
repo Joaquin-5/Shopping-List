@@ -1,14 +1,16 @@
 import AddIcon from "@mui/icons-material/Add";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { deleteItemCart, editQuantityItem } from "../../store/cart";
 import { ItemButton } from "../itemButton";
 import "./cart.styles.css";
 import { QuantityButton } from "./quantityButton";
 
 export const Cart = () => {
   const { items } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
 
   return (
     <div className="cart-container">
@@ -33,7 +35,15 @@ export const Cart = () => {
             {c.items.map((i) => (
               <div className="item" key={i._id}>
                 <p className="item-title">{i.name}</p>
-                <QuantityButton quantity={i.quantity} />
+                <QuantityButton
+                  quantity={i.quantity}
+                  onQuantityChange={(quantity) => {
+                    dispatch(editQuantityItem({...i, quantity}))
+                  }}
+                  onDeleteItem={() => {
+                    dispatch(deleteItemCart(i))
+                  }}
+                />
               </div>
             ))}
           </div>
