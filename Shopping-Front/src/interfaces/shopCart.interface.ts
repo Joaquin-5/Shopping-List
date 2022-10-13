@@ -7,5 +7,5 @@ export interface ShopCartItem extends Item{
 export interface ShopCartCategory {
     _id: string,
     name: string,
-    items?: ShopCartItem[]
+    items: ShopCartItem[]
 }

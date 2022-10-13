@@ -1,11 +1,15 @@
 import AddIcon from "@mui/icons-material/Add";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 import { ItemButton } from "../itemButton";
 import "./cart.styles.css";
 import { QuantityButton } from "./quantityButton";
 
 export const Cart = () => {
+  const { items } = useSelector((state: RootState) => state.cart);
+
   return (
     <div className="cart-container">
       <div className="additem-container">
@@ -23,51 +27,17 @@ export const Cart = () => {
       </div>
       <div className="item-container">
         <h1>Shopping list</h1>
-        
-        <div className="item-list">
-          <h2>Fruit and vegetables</h2>
-          <div className="item">
-            <p className="item-title">Acocado</p>
-            <QuantityButton quantity={4}/>
+        {items.map((c) => (
+          <div className="item-list" key={c._id}>
+            <h2>{c.name}</h2>
+            {c.items.map((i) => (
+              <div className="item" key={i._id}>
+                <p className="item-title">{i.name}</p>
+                <QuantityButton quantity={i.quantity} />
+              </div>
+            ))}
           </div>
-          <div className="item">
-            <p className="item-title">Pre-cooked corn 450g</p>
-            <QuantityButton quantity={4} />
-          </div>
-        </div>
-        <div className="item-list">
-          <h2>Meat and Fish</h2>
-          <div className="item">
-            <p className="item-title">Chicken 1kg </p>
-            <QuantityButton quantity={4} />
-          </div>
-          <div className="item">
-            <p className="item-title">Pork fillets 450g</p>
-            <QuantityButton quantity={4} />
-          </div>
-        </div>
-        <div className="item-list">
-          <h2>Meat and Fish</h2>
-          <div className="item">
-            <p className="item-title">Chicken 1kg </p>
-            <QuantityButton quantity={4} />
-          </div>
-          <div className="item">
-            <p className="item-title">Pork fillets 450g</p>
-            <QuantityButton quantity={4} />
-          </div>
-        </div>
-        <div className="item-list">
-          <h2>Meat and Fish</h2>
-          <div className="item">
-            <p className="item-title">Chicken 1kg </p>
-            <button className="button_quantity">3 pcs</button>
-          </div>
-          <div className="item">
-            <p className="item-title">Pork fillets 450g</p>
-            <button className="button_quantity">3 pcs</button>
-          </div>
-        </div>
+        ))}
       </div>
       <div className="search-container">
         <div className="input-container">
