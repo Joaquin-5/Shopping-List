@@ -23,6 +23,7 @@ export const Cart = () => {
       </div>
       <div className="item-container">
         <h1>Shopping list</h1>
+        
         <div className="item-list">
           <h2>Fruit and vegetables</h2>
           <div className="item">

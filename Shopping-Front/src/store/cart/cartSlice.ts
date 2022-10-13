@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Item, ShopCartItem } from "../../interfaces";
+import { Category, Item, ShopCartCategory, ShopCartItem } from "../../interfaces";
 
 export interface CartState {
-  items: ShopCartItem[];
+  items: ShopCartCategory[];
+}
+
+interface AddItemAction {
+  category: Category,
+  item: Item
 }
 
 const initialState: CartState = {
@@ -13,18 +18,28 @@ export const cartSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<Item>) => {
+    addItem: (state, action: PayloadAction<AddItemAction>) => {
+      state.items.push({
+        _id: action.payload.category._id,
+        name: action.payload.category.name,
+        items: [{...action.payload.item, quantity: 1}]
+      })
+    }
+    /* addItem: (state, action: PayloadAction<Item>) => {
       console.log(action.payload);
-      state.items = [...state.items.map((i) => {
-        if (action.payload._id === i._id) {
-          return { ...i, quantity: i.quantity + 1 };
-        }
-        return { ...action.payload, quantity: 1 };
-        // state.items = [...state.items, { ...action.payload, quantity: 1 }];
-      })];
-
+      const existingItem = state.items.find(
+        (item) => item._id === action.payload._id
+      );
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        state.items.push({
+          ...action.payload,
+          quantity: 1,
+        });
+      }
       // state.items.push(action.payload);
-    },
+    }, */
   },
 });
 
