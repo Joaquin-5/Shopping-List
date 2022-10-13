@@ -1,17 +1,19 @@
 import React from 'react'
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { shoppingApi } from "../../api";
 import { Cart } from "../../components/cart";
 import { ItemButton } from "../../components/itemButton";
 import { SideBar } from "../../components/sideBar/SideBar";
 import { Category, Item } from "../../interfaces";
 import { RootState } from "../../store";
+import { addItem } from '../../store/cart';
 
 export const ItemsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const {showCart} = useSelector((state: RootState) => state.ui)
+  const {showCart} = useSelector((state: RootState) => state.ui);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     shoppingApi.get('categories').then(res => {
@@ -31,7 +33,7 @@ export const ItemsPage = () => {
             <h2>{c.name}</h2>
             <Box gap='1.5rem .53rem' display='flex' flexWrap='wrap'>
             {c.items.map(i => (
-              <ItemButton key={i._id} text={i.name} onClick={() => console.log('hola')} icon={true}/>
+              <ItemButton key={i._id} text={i.name} onClick={() => dispatch(addItem(i))} icon={true}/>
             ))}
           </Box>
           </React.Fragment>
