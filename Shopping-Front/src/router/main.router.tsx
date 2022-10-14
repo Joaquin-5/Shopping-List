@@ -5,6 +5,7 @@ import { SideBar } from "../components/sideBar/SideBar";
 import { HistoryPage } from "../pages/history/History";
 import { ItemsPage } from "../pages/items/ItemsPage";
 import { getItems } from "../store/cart";
+import Statistics from '../pages/Statistics/Statistics';
 
 export const MainRouter = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ export const MainRouter = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<ItemsPage />} />
         <Route path="/history" element={<HistoryPage />} />
+        <Route path="/statistics" element={<Statistics />} />
       </Route>
     </Routes>
   );
