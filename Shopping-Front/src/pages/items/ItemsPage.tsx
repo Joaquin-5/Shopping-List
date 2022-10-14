@@ -1,19 +1,15 @@
-import React from "react";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { shoppingApi } from "../../api";
 import { Cart } from "../../components/cart";
 import { ItemButton } from "../../components/itemButton";
-import { SideBar } from "../../components/sideBar/SideBar";
-import { Category, Item } from "../../interfaces";
-import { RootState } from "../../store";
+import { Category } from "../../interfaces";
 import { addItem } from "../../store/cart";
 import "./items.styles.css";
 
 export const ItemsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const { showCart } = useSelector((state: RootState) => state.ui);
   const dispatch = useDispatch();
 
   useEffect(() => {

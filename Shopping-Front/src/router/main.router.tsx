@@ -26,8 +26,9 @@ export const MainRouter = () => {
 const Layout = () => {
   return (
     <div style={{ paddingTop: ".1px" }}>
-      <SideBar />
-      <Outlet />
+      <SideBar >
+        <Outlet />
+      </SideBar>
     </div>
   );
 };
