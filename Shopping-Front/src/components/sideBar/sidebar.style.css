@@ -21,9 +21,13 @@
 
 .icon-button {
     position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.icon-button::before {
+.icon-button-active::before {
     content: "";
     width: 5px;
     background-color: #F9A109;

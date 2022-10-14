@@ -6,7 +6,7 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "../../store";
 import "./sidebar.style.css";
 import { Box } from "@mui/material";
@@ -18,16 +18,19 @@ interface Props {
 export const SideBar: React.FC<Props> = ({ children }) => {
   const navigate = useNavigate();
   const { items } = useSelector((state: RootState) => state.cart);
+  const location = useLocation();
 
   return (
     <>
-      <Box display="flex" maxWidth={"100vw"} sx={{ overflow: "hidden" }}>
+      <Box display="flex" maxWidth={"100vw"}>
         <div className="container">
           <img src="logo.svg"></img>
           <div className="button-container">
             <Tooltip title="items">
               <IconButton
-                className="icon-button"
+                className={`icon-button ${
+                  location.pathname.split("/")[1] === "" && "icon-button-active"
+                }`}
                 sx={{ borderRadius: "5px" }}
                 onClick={() => navigate("/")}
               >
@@ -36,7 +39,10 @@ export const SideBar: React.FC<Props> = ({ children }) => {
             </Tooltip>
             <Tooltip title="history">
               <IconButton
-                className="icon-button"
+                className={`icon-button ${
+                  location.pathname.split("/")[1] === "history" &&
+                  "icon-button-active"
+                }`}
                 sx={{ borderRadius: "5px" }}
                 onClick={() => navigate("/history")}
               >
@@ -44,7 +50,11 @@ export const SideBar: React.FC<Props> = ({ children }) => {
               </IconButton>
             </Tooltip>
             <Tooltip title="statistics">
-              <IconButton className="icon-button" sx={{ borderRadius: "5px" }}>
+              <IconButton
+                className="icon-button"
+                sx={{ borderRadius: "5px" }}
+                onClick={() => navigate("/statistics")}
+              >
                 <QueryStatsIcon sx={{ fontSize: "2rem" }} />
               </IconButton>
             </Tooltip>
