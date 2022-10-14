@@ -9,6 +9,7 @@ import { SideBar } from "../../components/sideBar/SideBar";
 import { Category, Item } from "../../interfaces";
 import { RootState } from "../../store";
 import { addItem } from "../../store/cart";
+import "./items.styles.css";
 
 export const ItemsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -22,11 +23,9 @@ export const ItemsPage = () => {
   }, []);
 
   return (
-    <div style={{ paddingTop: ".1px" }}>
-      <SideBar />
-      {showCart && <Cart />}
+    <div className="home-container">
       {/* <div style={{height: '200vh', paddingLeft: '5%'}}><h1>Shoppingify allows you take your shopping list wherever you go</h1></div> */}
-      <div style={{ paddingLeft: "25%" }}>
+      <div className="items-home">
         {categories.map((c) => (
           <React.Fragment key={c._id}>
             <h2>{c.name}</h2>
@@ -50,6 +49,7 @@ export const ItemsPage = () => {
           </React.Fragment>
         ))}
       </div>
+      <Cart />
     </div>
   );
 };

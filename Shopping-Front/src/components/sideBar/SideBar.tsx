@@ -6,12 +6,14 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store";
 import { changeState } from "../../store/ui";
 import "./sidebar.style.css";
 
 export const SideBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { showCart } = useSelector((state: RootState) => state.ui);
   const { items } = useSelector((state: RootState) => state.cart);
 
@@ -21,12 +23,12 @@ export const SideBar = () => {
         <img src="logo.svg"></img>
         <div className="button-container">
           <Tooltip title="items">
-            <IconButton className="icon-button" sx={{ borderRadius: "5px" }}>
+            <IconButton className="icon-button" sx={{ borderRadius: "5px" }} onClick={() => navigate("/")}>
               <ListIcon sx={{ fontSize: "2rem" }} />
             </IconButton>
           </Tooltip>
           <Tooltip title="history">
-            <IconButton className="icon-button" sx={{ borderRadius: "5px" }}>
+            <IconButton className="icon-button" sx={{ borderRadius: "5px" }} onClick={() => navigate("/history")}>
               <HistoryIcon sx={{ fontSize: "2rem" }} />
             </IconButton>
           </Tooltip>
@@ -42,7 +44,7 @@ export const SideBar = () => {
             color: "#FFFFFF",
             "&:hover": { opacity: 1, backgroundColor: "#F9A109" },
           }}
-          onClick={() => dispatch(changeState(!showCart))}
+          href="#shopping-list"
         >
           <Badge
             badgeContent={items

@@ -13,7 +13,7 @@ export const Cart = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="cart-container">
+    <div className="cart-container" id="shopping-list">
       <div className="additem-container">
         <div className="image-container">
           <img src="source.svg" alt="imagen botella" />

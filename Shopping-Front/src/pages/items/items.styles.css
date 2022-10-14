@@ -1,0 +1,22 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: .1px;
+}
+
+.items-home {
+    padding-left: 25%;
+}
+
+@media (min-width: 768px) {
+    .home-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .items-home {
+        padding-left: 220px;
+
+    }
+}

@@ -51,6 +51,7 @@ export const cartSlice = createSlice({
           ],
         });
       }
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
     editQuantityItem: (state, action: PayloadAction<ShopCartItem>) => {
       const category = state.items.find(
@@ -62,6 +63,7 @@ export const cartSlice = createSlice({
           item.quantity = action.payload.quantity;
         }
       }
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
     deleteItemCart: (state, action: PayloadAction<ShopCartItem>) => {
       const category = state.items.find(
@@ -71,10 +73,22 @@ export const cartSlice = createSlice({
         const item = category.items.find((i) => i._id === action.payload._id);
         if (item) {
           category.items = category.items.filter(i => i._id !== action.payload._id);
+
+          if (category.items.length === 0) {
+            state.items = state.items.filter((c) => c._id !== action.payload.category._id);
+          }
         }
       }
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
+    getItems: (state) => {
+      const cart = localStorage.getItem('cart');
+
+      if (cart) {
+        state.items = JSON.parse(cart);
+      }
+    }
   },
 });
 
-export const { addItem, editQuantityItem, deleteItemCart } = cartSlice.actions;
+export const { addItem, editQuantityItem, deleteItemCart, getItems } = cartSlice.actions;
