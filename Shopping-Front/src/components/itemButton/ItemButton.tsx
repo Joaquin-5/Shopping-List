@@ -17,6 +17,7 @@ export const ItemButton: React.FC<Props> = ({text, onClick, icon}) => {
         backgroundColor: "#FFFFFF",
         borderRadius: "12px",
         color: "#000000",
+        fontWeight: 'bold',
         "&:hover": { backgroundColor: "#FFFFFF" },
       }}
       onClick={onClick}

@@ -1,0 +1,79 @@
+.addItem-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-addItem {
+    text-align: center;
+}
+
+.form-addItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    gap: 2rem;
+}
+
+.field-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.label {
+    font-size: .9rem;
+    color: #34333A;
+    font-weight: bold;
+}
+
+.field {
+    border: 2px solid #BDBDBD;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.field:focus {
+    outline-color: #F9A109;
+}
+
+.textarea {
+    min-width: 240px;
+    max-width: 240px;
+    min-height: 98px;
+    max-height: 120px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.option {
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.option:hover {
+    background-color: #F2F2F2;
+}
+
+.submit-cancel {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+    margin-bottom: 5rem;
+    gap: 2.5rem;
+}
+
+.cancel-button {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+.submit-button {
+    border: none;
+    padding: 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #FFFFFF;
+    background-color: #F9A109;
+}

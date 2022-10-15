@@ -1,7 +1,6 @@
 .cart-container {
     background-color: #FFF0DE;
     padding: .1px;
-    padding-left: 20%;
     max-width: 99vw;
     height: 100vh;
     overflow-y: scroll;
@@ -120,5 +119,22 @@
     .cart-container {
         padding: 0;
         overflow: hidden;
+        min-width: 450px;
+    }
+
+    .additem-container {
+        justify-content: space-between;
+        margin: 2rem 3rem;
+        padding: 0;
+    }
+
+    .info-container {
+        width: 60%;
+    }
+
+    .image-container img {
+        top: -16px;
+        left: 20px;
+        transform: scale(1.1);
     }
 }   
