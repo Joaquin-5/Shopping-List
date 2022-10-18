@@ -51,10 +51,6 @@
     font-family: 'Quicksand', sans-serif;
 }
 
-.option:hover {
-    background-color: #F2F2F2;
-}
-
 .submit-cancel {
     display: flex;
     gap: 1rem;

@@ -3,6 +3,26 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 5rem;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-principal-history {
+    text-align: center;
+}
+
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fecha-mes {
+    font-weight: bold;
 }
 
 .order-container {
@@ -10,23 +30,23 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 80%;
-    max-width: 900px;
+    width: 70%;
     align-items: center;
     background-color: #FFFFFF;
     border-radius: 12px;
+    margin-bottom: 2rem;
 }
 
 .datos_pedido-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 2rem;
+    gap: .1rem;
 }
 
 .fecha-compra-container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: space-between;
     align-items: center;
     color: #C1C1C4;
@@ -41,6 +61,7 @@
     border-radius: 8px;
     padding: .2rem .3rem;
     user-select: none;
+    text-align: center;
 }
 
 .estado-completed {
@@ -58,12 +79,33 @@
         flex-direction: row;    
     }
 
-    .orders-container {
-        padding: 2rem 5rem;
+    .content-container {
+        margin-left: 4rem;
         flex: 1;
     }
 
     .order-container, .datos_pedido-container, .fecha-compra-container {
         flex-direction: row;
+    }
+
+    .orders-container {
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .order-container {
+        width: 100%;
+    }
+
+    .datos_pedido-container {
+        gap: 2rem;
+    }
+
+    .titulo-pedido {
+        font-size: 1.3rem;
+    }
+
+    .titulo-principal-history {
+        text-align: left;
     }
 }

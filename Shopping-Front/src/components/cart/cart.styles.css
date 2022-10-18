@@ -113,12 +113,12 @@
     color: #FFFFFF;
     font-size: 1rem;
     font-family: 'Quicksand';
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
     .cart-container {
         padding: 0;
-        overflow: hidden;
         min-width: 450px;
     }
 
@@ -136,5 +136,9 @@
         top: -16px;
         left: 20px;
         transform: scale(1.1);
+    }
+
+    .item-title {
+        font-size: 1.1rem;
     }
 }   
