@@ -1,18 +1,19 @@
-import { alpha, Box, Icon, InputBase, styled, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { shoppingApi } from "../../api";
+import SearchIcon from "@mui/icons-material/Search";
+import { alpha, Box, InputBase, styled } from "@mui/material";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Cart } from "../../components/cart";
 import { ItemButton } from "../../components/itemButton";
-import { Category } from "../../interfaces";
+import { RootState } from "../../store";
 import { addItem } from "../../store/cart";
-import SearchIcon from "@mui/icons-material/Search";
+import { startGetCategories } from "../../store/data";
+import { searchItems } from "../../store/data/dataThunk";
 import "./items.styles.css";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: '12px',
-  backgroundColor: '#FFFFFF',
+  borderRadius: "12px",
+  backgroundColor: "#FFFFFF",
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
@@ -48,18 +49,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     [theme.breakpoints.up("sm")]: {
       width: "20ch",
     },
-    borderRadius: '12px'
+    borderRadius: "12px",
   },
 }));
 
 export const ItemsPage = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const { categories, itemsSearch } = useSelector(
+    (state: RootState) => state.data
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    shoppingApi.get("categories").then((res) => {
-      setCategories(res.data);
-    });
+    dispatch(startGetCategories() as any);
   }, []);
 
   return (
@@ -78,40 +79,93 @@ export const ItemsPage = () => {
               <StyledInputBase
                 placeholder="search item"
                 inputProps={{ "aria-label": "search" }}
+                onChange={(e) => dispatch(searchItems(e.target.value) as any)}
                 // onChange={handleSearch}
               />
             </Search>
           </div>
         </div>
         <div className="items-home">
-          {categories.map((c) => (
-            <React.Fragment key={c._id}>
-              <h2 style={{marginTop: '3rem'}}>{c.name}</h2>
-              <Box gap="1.5rem .53rem" display="flex" flexWrap="wrap">
-                {c.items?.map((i) => (
-                  <ItemButton
-                    key={i._id}
-                    text={i.name}
-                    onClick={() =>
-                      dispatch(
-                        addItem({
-                          category: c,
-                          item: {
-                            ...i,
-                            category: { _id: c._id, name: c.name },
-                          },
-                        })
-                      )
-                    }
-                    icon={true}
-                  />
-                ))}
-              </Box>
-            </React.Fragment>
-          ))}
+          {itemsSearch.length > 0
+            ? itemsSearch.map((c) => (
+                <React.Fragment key={c._id}>
+                  <h2 style={{ marginTop: "3rem" }}>{c.name}</h2>
+                  <Box gap="1.5rem .53rem" display="flex" flexWrap="wrap">
+                    {c.items?.map((i) => (
+                      <ItemButton
+                        key={i._id}
+                        text={i.name}
+                        onClick={() =>
+                          dispatch(
+                            addItem({
+                              category: c,
+                              item: {
+                                ...i,
+                                category: { _id: c._id, name: c.name },
+                              },
+                            })
+                          )
+                        }
+                        icon={true}
+                      />
+                    ))}
+                  </Box>
+                </React.Fragment>
+              ))
+            : categories.map((c) => (
+                <React.Fragment key={c._id}>
+                  <h2 style={{ marginTop: "3rem" }}>{c.name}</h2>
+                  <Box gap="1.5rem .53rem" display="flex" flexWrap="wrap">
+                    {c.items?.map((i) => (
+                      <ItemButton
+                        key={i._id}
+                        text={i.name}
+                        onClick={() =>
+                          dispatch(
+                            addItem({
+                              category: c,
+                              item: {
+                                ...i,
+                                category: { _id: c._id, name: c.name },
+                              },
+                            })
+                          )
+                        }
+                        icon={true}
+                      />
+                    ))}
+                  </Box>
+                </React.Fragment>
+              ))}
         </div>
       </Box>
       <Cart />
     </div>
   );
 };
+
+// {categories.map((c) => (
+//   <React.Fragment key={c._id}>
+//     <h2 style={{ marginTop: "3rem" }}>{c.name}</h2>
+//     <Box gap="1.5rem .53rem" display="flex" flexWrap="wrap">
+//       {c.items?.map((i) => (
+//         <ItemButton
+//           key={i._id}
+//           text={i.name}
+//           onClick={() =>
+//             dispatch(
+//               addItem({
+//                 category: c,
+//                 item: {
+//                   ...i,
+//                   category: { _id: c._id, name: c.name },
+//                 },
+//               })
+//             )
+//           }
+//           icon={true}
+//         />
+//       ))}
+//     </Box>
+//   </React.Fragment>
+// ))}
