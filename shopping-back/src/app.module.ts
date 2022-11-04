@@ -7,6 +7,7 @@ import { ItemsModule } from './items/items.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
+import { ListsModule } from './lists/lists.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SeedModule } from './seed/seed.module';
     CategoriesModule,
     CommonModule,
     SeedModule,
+    ListsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
