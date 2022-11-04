@@ -40,6 +40,22 @@
 
 .item-container {
     padding-left: 1.25rem;
+    flex: 1;
+}
+
+.noItem-container {
+    height: 100%;
+    /* flex: 1; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.noItem-image {
+    position: absolute;
+    bottom: 0;
 }
 
 .item-container h1 {
@@ -89,6 +105,10 @@
     overflow: hidden;
 }
 
+.input-container-disabled {
+    border-color: #C1C1C4;
+}
+
 .input-text {
     height: 80%;
     border: none;
@@ -114,6 +134,10 @@
     font-size: 1rem;
     font-family: 'Quicksand';
     cursor: pointer;
+}
+
+.input-submit:disabled {
+    background-color: #C1C1C4;
 }
 
 @media (min-width: 768px) {

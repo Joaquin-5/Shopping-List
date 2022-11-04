@@ -1,5 +1,6 @@
 .addItem-container {
     height: 100vh;
+    max-width: 99vw;
     display: flex;
     flex-direction: column;
 }
@@ -26,6 +27,7 @@
     font-size: .9rem;
     color: #34333A;
     font-weight: bold;
+    order: -1;
 }
 
 .field {
@@ -36,6 +38,10 @@
 
 .field:focus {
     outline-color: #F9A109;
+}
+
+.field:focus + .label {
+    color: #F9A109 !important;
 }
 
 .textarea {
@@ -63,6 +69,7 @@
     border: none;
     background-color: transparent;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 .submit-button {
@@ -72,4 +79,24 @@
     font-size: 1rem;
     color: #FFFFFF;
     background-color: #F9A109;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .addItem-container {
+        width: 25%;
+    }
+
+    .field {
+        padding: 1.3rem;
+    }
+
+    .textarea {
+        min-width: 349px;
+        max-width: 349px;
+    }
+
+    .submit-cancel {
+        margin-bottom: 7rem;
+    }
 }
