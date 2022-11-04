@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Category } from "../../interfaces";
+import { Category, Item } from "../../interfaces";
 
-interface CategoryState {
+interface DataState {
   categories: Category[];
   itemsSearch: Category[];
+  activeItem: Item | null;
 }
 
-const initialState: CategoryState = {
+const initialState: DataState = {
   categories: [],
   itemsSearch: [],
+  activeItem: null,
 };
 
 export const dataSlice = createSlice({
@@ -21,7 +23,10 @@ export const dataSlice = createSlice({
     setItemsSearch: (state, action: PayloadAction<Category[]>) => {
       state.itemsSearch = action.payload;
     },
+    setActiveItem: (state, action: PayloadAction<Item>) => {
+      state.activeItem = action.payload;
+    }
   },
 });
 
-export const { setCategories, setItemsSearch } = dataSlice.actions;
+export const { setCategories, setItemsSearch, setActiveItem } = dataSlice.actions;

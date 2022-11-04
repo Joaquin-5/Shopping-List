@@ -7,18 +7,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { deleteItemCart, editQuantityItem } from "../../store/cart";
 import { ItemButton } from "../itemButton";
+import { ItemsDetails } from "../itemDetails/ItemsDetails";
 import { AddItem } from "./addItem/AddItem";
 import "./cart.styles.css";
 import { QuantityButton } from "./quantityButton";
 
-export const Cart = () => {
+interface Props {
+  cartState: "addItem" | "default" | "detailItem";
+  setCartState: React.Dispatch<
+    React.SetStateAction<"addItem" | "default" | "detailItem">
+  >;
+}
+
+export const Cart: React.FC<Props> = ({ cartState, setCartState }) => {
   const { items } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  const [addItem, setAddItem] = useState(false);
 
   return (
     <>
-      {!addItem ? (
+      {cartState === "default" ? (
         <div className="cart-container" id="shopping-list">
           <div className="additem-container">
             <div className="image-container">
@@ -28,7 +35,7 @@ export const Cart = () => {
               <h3 className="titulo-secundario">Didn’t find what you need?</h3>
               <ItemButton
                 text="Add item"
-                onClick={() => setAddItem(true)}
+                onClick={() => setCartState("addItem")}
                 icon={false}
               />
             </div>
@@ -89,8 +96,10 @@ export const Cart = () => {
             </div>
           </div>
         </div>
+      ) : cartState === "addItem" ? (
+        <AddItem setCartState={setCartState} />
       ) : (
-        <AddItem setAddItem={setAddItem} />
+        <ItemsDetails setCartState={setCartState}/>
       )}
     </>
   );

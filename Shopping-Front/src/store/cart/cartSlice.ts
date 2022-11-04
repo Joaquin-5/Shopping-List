@@ -24,7 +24,7 @@ export const cartSlice = createSlice({
   name: "counter",
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<AddItemAction>) => {
+    addItemToCart: (state, action: PayloadAction<AddItemAction>) => {
       const category = state.items.find(
         (c) => c._id === action.payload.category._id
       );
@@ -91,4 +91,4 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem, editQuantityItem, deleteItemCart, getItems } = cartSlice.actions;
+export const { addItemToCart, editQuantityItem, deleteItemCart, getItems } = cartSlice.actions;

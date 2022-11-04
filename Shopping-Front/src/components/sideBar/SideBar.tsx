@@ -24,7 +24,7 @@ export const SideBar: React.FC<Props> = ({ children }) => {
     <>
       <Box display="flex" maxWidth={"100vw"}>
         <div className="container">
-          <img src="logo.svg"></img>
+          <img src="logo.svg" onClick={() => navigate("/")} className="logo"></img>
           <div className="button-container">
             <Tooltip title="items">
               <IconButton

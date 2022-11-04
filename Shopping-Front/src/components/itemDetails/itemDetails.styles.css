@@ -1,0 +1,45 @@
+.details-container {
+    background-color: #FFFFFF;
+    width: 25%;
+    padding: 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.backButton-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.image {
+    width: 100%;
+    border-radius: 25px;
+    margin-bottom: 2rem;
+}
+
+.detail-label {
+    margin: 0;
+    font-size: .9rem;
+    color: #C1C1C4;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.name {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.submit-cancel-details {
+    display: flex;
+    gap: 1rem;
+    gap: 2.5rem;
+    margin-top: auto;
+    align-items: center;
+    justify-content: center;
+}

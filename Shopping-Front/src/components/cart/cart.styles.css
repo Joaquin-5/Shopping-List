@@ -9,6 +9,10 @@
     flex-direction: column;
 }
 
+.logo {
+    cursor: pointer;
+}
+
 .additem-container {
     background-color: #80485B;
     margin: 10% 5%;
@@ -47,7 +51,7 @@
     height: 100%;
     /* flex: 1; */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     position: relative;
@@ -151,6 +155,11 @@
         margin: 2rem 3rem;
         padding: 0;
     }
+
+    .noItem-container {
+        justify-content: center;
+    }
+
 
     .info-container {
         width: 60%;

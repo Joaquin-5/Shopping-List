@@ -19,7 +19,9 @@ import { RootState } from "../../../store";
 import "./addItem.styles.css";
 
 interface Props {
-  setAddItem: React.Dispatch<React.SetStateAction<boolean>>;
+  setCartState: React.Dispatch<
+    React.SetStateAction<"addItem" | "default" | "detailItem">
+  >;
 }
 
 interface cboOptions {
@@ -27,7 +29,7 @@ interface cboOptions {
   label: string;
 }
 
-export const AddItem: React.FC<Props> = ({ setAddItem }) => {
+export const AddItem: React.FC<Props> = ({ setCartState }) => {
   // const [inputValue, setInputValue] = React.useState("");
   const [openDialog, setOpenDialog] = React.useState(false);
   const { categories } = useSelector((state: RootState) => state.data);
@@ -70,10 +72,14 @@ export const AddItem: React.FC<Props> = ({ setAddItem }) => {
     setOpenDialog(false);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="addItem-container">
       <h1 className="title-addItem">Add a new item</h1>
-      <form action="" className="form-addItem">
+      <form className="form-addItem" onSubmit={handleSubmit}>
         <div className="field-container">
           <input
             type="text"
@@ -128,11 +134,10 @@ export const AddItem: React.FC<Props> = ({ setAddItem }) => {
                 sx={{
                   "& fieldset": {
                     borderRadius: "12px",
+                    border: "2px solid #BDBDBD",
                   },
-                  ".MuiOutlinedInput-root": {
-                    "&:focus": {
-                      borderColor: "#F9A109 !important",
-                    },
+                  "& fieldset:hover": {
+                    borderColor: "#F9A109 !important",
                   },
                 }}
               />
@@ -140,15 +145,16 @@ export const AddItem: React.FC<Props> = ({ setAddItem }) => {
             componentsProps={{
               paper: {
                 sx: {
+                  fontSize: "1.2rem",
                   borderRadius: "12px",
                   marginTop: "20px",
                   fontWeight: "bold",
                   padding: "1rem",
                   fontFamily: "'Quicksand', sans-serif",
-                  "& > *": {},
-                  "& > *:hover": {
+                  "& > *": {
                     borderRadius: "12px",
                   },
+                  "& > *:hover": {},
                 },
               },
             }}
@@ -158,7 +164,11 @@ export const AddItem: React.FC<Props> = ({ setAddItem }) => {
           </label>
         </div>
         <div className="submit-cancel">
-          <button className="cancel-button" onClick={handleClickOpenDialog}>
+          <button
+            className="cancel-button"
+            type="button"
+            onClick={handleClickOpenDialog}
+          >
             cancel
           </button>
           <input type="submit" value="Save" className="submit-button" />
@@ -175,7 +185,7 @@ export const AddItem: React.FC<Props> = ({ setAddItem }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            You will louse all the information.
+            You will loose all the information.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -183,7 +193,7 @@ export const AddItem: React.FC<Props> = ({ setAddItem }) => {
           <Button
             onClick={() => {
               handleCloseDialog();
-              setAddItem(false);
+              setCartState("default");
             }}
             autoFocus
             color="error"

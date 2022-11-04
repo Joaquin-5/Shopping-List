@@ -1,12 +1,12 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha, Box, InputBase, styled } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Cart } from "../../components/cart";
 import { ItemButton } from "../../components/itemButton";
 import { RootState } from "../../store";
-import { addItem } from "../../store/cart";
-import { startGetCategories } from "../../store/data";
+import { addItemToCart } from "../../store/cart";
+import { setActiveItem, startGetCategories } from "../../store/data";
 import { searchItems } from "../../store/data/dataThunk";
 import "./items.styles.css";
 
@@ -58,6 +58,9 @@ export const ItemsPage = () => {
     (state: RootState) => state.data
   );
   const dispatch = useDispatch();
+  const [cartState, setCartState] = useState<
+    "default" | "addItem" | "detailItem"
+  >("default");
 
   useEffect(() => {
     dispatch(startGetCategories() as any);
@@ -97,7 +100,7 @@ export const ItemsPage = () => {
                         text={i.name}
                         onClick={() =>
                           dispatch(
-                            addItem({
+                            addItemToCart({
                               category: c,
                               item: {
                                 ...i,
@@ -107,6 +110,10 @@ export const ItemsPage = () => {
                           )
                         }
                         icon={true}
+                        onItemClick={() => {
+                          setCartState('detailItem');
+                          dispatch(setActiveItem({ ...i, category: c }));
+                        }}
                       />
                     ))}
                   </Box>
@@ -122,7 +129,7 @@ export const ItemsPage = () => {
                         text={i.name}
                         onClick={() =>
                           dispatch(
-                            addItem({
+                            addItemToCart({
                               category: c,
                               item: {
                                 ...i,
@@ -132,6 +139,10 @@ export const ItemsPage = () => {
                           )
                         }
                         icon={true}
+                        onItemClick={() => {
+                          setCartState('detailItem');
+                          dispatch(setActiveItem({ ...i, category: c }));
+                        }}
                       />
                     ))}
                   </Box>
@@ -139,7 +150,7 @@ export const ItemsPage = () => {
               ))}
         </div>
       </Box>
-      <Cart />
+      <Cart cartState={cartState} setCartState={setCartState} />
     </div>
   );
 };

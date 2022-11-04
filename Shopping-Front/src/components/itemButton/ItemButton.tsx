@@ -1,23 +1,47 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 
 interface Props {
-    text: string,
-    onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
-    icon: boolean
+  text: string;
+  onClick?:
+    | React.MouseEventHandler<SVGSVGElement | HTMLButtonElement>
+    | undefined;
+  icon: boolean;
+  onItemClick?: React.MouseEventHandler<HTMLSpanElement> | undefined
 }
 
-export const ItemButton: React.FC<Props> = ({text, onClick, icon}) => {
-  return (
+export const ItemButton: React.FC<Props> = ({ text, onClick, icon = true, onItemClick }) => {
+  return icon ? (
     <Button
-      endIcon={icon ? <AddIcon sx={{ color: "#C1C1C4" }} /> : null}
+      endIcon={
+        icon ? (
+          <Tooltip
+            children={<AddIcon sx={{ color: "#C1C1C4" }} onClick={onClick} />}
+            title={"Agregar al Carrito"}
+          />
+        ) : null
+      }
       variant="contained"
       size="large"
       sx={{
         backgroundColor: "#FFFFFF",
         borderRadius: "12px",
         color: "#000000",
-        fontWeight: 'bold',
+        fontWeight: "bold",
+        "&:hover": { backgroundColor: "#FFFFFF" },
+      }}
+    >
+      <span onClick={onItemClick}>{text}</span>
+    </Button>
+  ) : (
+    <Button
+      variant="contained"
+      size="large"
+      sx={{
+        backgroundColor: "#FFFFFF",
+        borderRadius: "12px",
+        color: "#000000",
+        fontWeight: "bold",
         "&:hover": { backgroundColor: "#FFFFFF" },
       }}
       onClick={onClick}
