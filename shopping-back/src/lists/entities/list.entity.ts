@@ -1,12 +1,13 @@
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
-import { Item } from '../../items/entities/item.entity';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Category } from 'src/categories/entities/category.entity';
 
+@Schema()
 export class List {
   @Prop()
   name: string;
 
   @Prop()
-  items: Item[];
+  items: Category[];
 
   @Prop()
   status: 'cancelled' | 'completed' | 'pending';
