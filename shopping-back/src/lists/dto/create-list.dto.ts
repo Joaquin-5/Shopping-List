@@ -1,5 +1,5 @@
-import { IsArray, IsDate, IsNotEmpty, IsString } from 'class-validator';
-import { Item } from 'src/items/entities/item.entity';
+import { IsArray, IsNotEmpty, IsString } from 'class-validator';
+import { Category } from 'src/categories/entities/category.entity';
 
 export class CreateListDto {
   @IsString()
@@ -8,7 +8,7 @@ export class CreateListDto {
 
   @IsArray()
   @IsNotEmpty()
-  items: Item[];
+  items: Category[];
 
   // @IsDate()
   // @IsNotEmpty()
