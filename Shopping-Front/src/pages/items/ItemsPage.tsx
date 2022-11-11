@@ -94,7 +94,7 @@ export const ItemsPage = () => {
                 <React.Fragment key={c._id}>
                   <h2 style={{ marginTop: "3rem" }}>{c.name}</h2>
                   <Box gap="1.5rem .53rem" display="flex" flexWrap="wrap">
-                    {c.items?.map((i) => (
+                    {c.items?.map((i:any) => (
                       <ItemButton
                         key={i._id}
                         text={i.name}
@@ -123,7 +123,7 @@ export const ItemsPage = () => {
                 <React.Fragment key={c._id}>
                   <h2 style={{ marginTop: "3rem" }}>{c.name}</h2>
                   <Box gap="1.5rem .53rem" display="flex" flexWrap="wrap">
-                    {c.items?.map((i) => (
+                    {c.items?.map((i:any) => (
                       <ItemButton
                         key={i._id}
                         text={i.name}

@@ -69,6 +69,11 @@
     border: 1px solid #56CCF2;
 }
 
+.estado-pending {
+    color: #f8b94d;
+    border: 1px solid #f8b94d;
+}
+
 .estado-cancelled {
     color: #EB5757;
     border: 1px solid #EB5757;

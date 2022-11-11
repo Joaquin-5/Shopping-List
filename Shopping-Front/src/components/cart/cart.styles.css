@@ -148,6 +148,8 @@
     .cart-container {
         padding: 0;
         min-width: 450px;
+        position: sticky;
+        top: 0;
     }
 
     .additem-container {
