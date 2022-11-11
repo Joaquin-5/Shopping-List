@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { deleteItemCart, editQuantityItem } from "../../store/cart";
+import { startAddToList } from "../../store/history";
 import { ItemButton } from "../itemButton";
 import { ItemsDetails } from "../itemDetails/ItemsDetails";
 import { AddItem } from "./addItem/AddItem";
@@ -22,6 +23,8 @@ interface Props {
 export const Cart: React.FC<Props> = ({ cartState, setCartState }) => {
   const { items } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+
+  const [nameList, setNameList] = useState("");
 
   return (
     <>
@@ -86,12 +89,15 @@ export const Cart: React.FC<Props> = ({ cartState, setCartState }) => {
                 className="input-text"
                 placeholder="Enter a name"
                 disabled={items.length < 1}
+                onChange={(e) => setNameList(e.target.value)}
+                value={nameList}
               />
               <input
-                type="submit"
+                type="button"
                 value="Save"
                 className="input-submit"
                 disabled={items.length < 1}
+                onClick={() => dispatch(startAddToList(nameList, items!) as any)}
               />
             </div>
           </div>

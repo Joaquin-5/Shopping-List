@@ -1,6 +1,7 @@
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { addItemToCart } from "../../store/cart";
 import "./itemDetails.styles.css";
 
 interface Props {
@@ -41,17 +42,14 @@ export const ItemsDetails: React.FC<Props> = ({ setCartState }) => {
           type="button"
           value="Add to list"
           className="submit-button"
-          /* onClick={() =>
-                dispatch(
-                addItemToCart({
-                    category: c,
-                    item: {
-                    ...i,
-                    category: { _id: c._id, name: c.name },
-                    },
-                })
-                )
-            } */
+          onClick={() =>
+            dispatch(
+              addItemToCart({
+                category: activeItem!.category,
+                item: activeItem!,
+              })
+            )
+          }
         />
       </div>
     </div>

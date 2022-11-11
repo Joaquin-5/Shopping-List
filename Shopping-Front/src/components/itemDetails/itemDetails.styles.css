@@ -1,7 +1,7 @@
 .details-container {
     background-color: #FFFFFF;
-    width: 25%;
-    padding: 1.5rem 3rem;
+    width: 100%;
+    padding: 1.2rem;
     display: flex;
     flex-direction: column;
 }
@@ -42,4 +42,11 @@
     margin-top: auto;
     align-items: center;
     justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .details-container {
+        width: 25%;
+        padding: 1.5rem 3rem;
+    }
 }
