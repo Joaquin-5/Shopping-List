@@ -33,18 +33,33 @@ export class ListsService {
   async findAll() {
     try {
       const lists = await this.listModel.find();
-      // Return lists grouped by date month and year then sorted by date
-      return lists.reduce((acc, list) => {
+      // Return array lists grouped by date month and year then sorted by date
+      const listsByDate = lists.reduce((acc, list) => {
         const date = new Date(list.createdAt);
-        const month = date.getMonth();
+        const month = date.getMonth() + 1;
         const year = date.getFullYear();
-        const monthYear = `${month}-${year}`;
-        if (!acc[monthYear]) {
-          acc[monthYear] = [];
+        const key = `${month}-${year}`;
+        if (!acc[key]) {
+          acc[key] = [];
         }
-        acc[monthYear].push(list);
+        acc[key].push(list);
         return acc;
       }, {});
+      return Object.keys(listsByDate)
+        .sort((a, b) => {
+          const monthA = parseInt(a.split('-')[0]);
+          const yearA = parseInt(a.split('-')[1]);
+          const monthB = parseInt(b.split('-')[0]);
+          const yearB = parseInt(b.split('-')[1]);
+          if (yearA > yearB) return -1;
+          if (yearA < yearB) return 1;
+          if (monthA > monthB) return -1;
+          if (monthA < monthB) return 1;
+          return 0;
+        })
+        .map((key) => {
+          return { date: key, lists: listsByDate[key] };
+        });
     } catch (error) {
       this.handleException(error);
     }
