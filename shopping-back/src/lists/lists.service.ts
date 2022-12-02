@@ -33,7 +33,18 @@ export class ListsService {
   async findAll() {
     try {
       const lists = await this.listModel.find();
-      return lists;
+      // Return lists grouped by date month and year then sorted by date
+      return lists.reduce((acc, list) => {
+        const date = new Date(list.createdAt);
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        const monthYear = `${month}-${year}`;
+        if (!acc[monthYear]) {
+          acc[monthYear] = [];
+        }
+        acc[monthYear].push(list);
+        return acc;
+      }, {});
     } catch (error) {
       this.handleException(error);
     }
