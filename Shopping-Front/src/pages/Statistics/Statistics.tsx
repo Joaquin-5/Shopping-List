@@ -152,7 +152,7 @@ const Statistics: React.FC<StatisticsInterface> = () => {
           <h2>Monthly Summary</h2>
         </div>
       </div>
-      <Cart cartState="default" />
+      {/* <Cart cartState="default" /> */}
     </>
   );
 };
