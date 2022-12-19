@@ -13,6 +13,9 @@ export class Category extends Document {
 
   @Prop()
   items: Item[];
+
+  // @Prop()
+  category?: Category;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);

@@ -8,6 +8,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 import { ListsModule } from './lists/lists.module';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ListsModule } from './lists/lists.module';
     CommonModule,
     SeedModule,
     ListsModule,
+    StatsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

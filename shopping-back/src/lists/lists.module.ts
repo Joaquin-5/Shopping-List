@@ -15,5 +15,6 @@ import { ListSchema, List } from './entities/list.entity';
       },
     ]),
   ],
+  exports: [ListsService, MongooseModule],
 })
 export class ListsModule {}
