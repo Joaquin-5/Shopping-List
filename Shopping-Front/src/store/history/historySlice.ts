@@ -8,8 +8,13 @@ interface History {
   createdAt: string
 }
 
+interface HistoryResponse {
+  date: string,
+  lists: History[]
+}
+
 interface HistoryState {
-  histories: History[]
+  histories: HistoryResponse[]
 }
 
 const initialState: HistoryState = {
@@ -20,13 +25,13 @@ export const historySlice = createSlice({
   name: "history",
   initialState,
   reducers: {
-    addList: (state, action) => {
+    /* addList: (state, action) => {
       state.histories.push(action.payload);
-    },
+    }, */
     getList: (state, action) => {
       state.histories = action.payload;
     }
   },
 });
 
-export const { addList, getList } = historySlice.actions;
+export const { getList } = historySlice.actions;

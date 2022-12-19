@@ -51,7 +51,10 @@ export const SideBar: React.FC<Props> = ({ children }) => {
             </Tooltip>
             <Tooltip title="statistics">
               <IconButton
-                className="icon-button"
+                className={`icon-button ${
+                  location.pathname.split("/")[1] === "statistics" &&
+                  "icon-button-active"
+                }`}
                 sx={{ borderRadius: "5px" }}
                 onClick={() => navigate("/statistics")}
               >

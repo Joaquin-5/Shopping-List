@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Icon, InputAdornment, TextField } from "@mui/material";
+import { Box, Icon, InputAdornment, TextField } from "@mui/material";
 import "./history.styles.css";
 import IconButton from "@mui/material/IconButton";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -22,83 +22,38 @@ export const HistoryPage = () => {
     dispatch(startGetHistory() as any);
   }, []);
 
+  console.log(histories.map((i) => i.lists.map((h) => h.name)));
+
   return (
     <div className="history-container">
       <div className="content-container">
         <h1 className="titulo-principal-history">Shopping history</h1>
         <div className="orders-container">
-          <p className="fecha-mes">August 2020</p>
-          <div className="order-container">
-            <h2 className="titulo-pedido">Grocery List</h2>
-            <div className="datos_pedido-container">
-              <div className="fecha-compra-container">
-                <CalendarMonthIcon />
-                <p className="fecha-compra">Mon 27.8.2020</p>
-              </div>
-              <p className="estado estado-completed">completed</p>
-              <IconButton className="ver-detalle" sx={{ color: "#F9A109" }}>
-                <ArrowForwardIosIcon />
-              </IconButton>
-            </div>
-          </div>
-          <div className="order-container">
-            <h2 className="titulo-pedido">Grocery List</h2>
-            <div className="datos_pedido-container">
-              <div className="fecha-compra-container">
-                <CalendarMonthIcon />
-                <p className="fecha-compra">Mon 27.8.2020</p>
-              </div>
-              <p className="estado estado-completed">completed</p>
-              <IconButton className="ver-detalle" sx={{ color: "#F9A109" }}>
-                <ArrowForwardIosIcon />
-              </IconButton>
-            </div>
-          </div>
-
-          {histories.map((i) => (
-            <div className="order-container">
-              <h2 className="titulo-pedido">{i.name}</h2>
-              <div className="datos_pedido-container">
-                <div className="fecha-compra-container">
-                  <CalendarMonthIcon />
-                  <p className="fecha-compra">{dayjs(i.createdAt).format("ddd DD.MM.YYYY")}</p>
-                </div>
-                <p className={`estado estado-${i.status}`}>{i.status}</p>
-                <IconButton className="ver-detalle" sx={{ color: "#F9A109" }}>
-                  <ArrowForwardIosIcon />
-                </IconButton>
-              </div>
-            </div>
+          {histories.map((i, index) => (
+            <>
+              <p className="fecha-mes">{dayjs(i.date.split("-")[0]).format("MMMM")} {i.date.split("-")[1]}</p>
+                {i.lists.map((h) => (
+                  <div className="order-container">
+                    <h2 className="titulo-pedido">{h.name}</h2>
+                    <div className="datos_pedido-container">
+                      <div className="fecha-compra-container">
+                        <CalendarMonthIcon />
+                        <p className="fecha-compra">
+                          {dayjs(h.createdAt).format("ddd DD.MM.YYYY")}
+                        </p>
+                      </div>
+                      <p className={`estado estado-${h.status}`}>{h.status}</p>
+                      <IconButton
+                        className="ver-detalle"
+                        sx={{ color: "#F9A109" }}
+                      >
+                        <ArrowForwardIosIcon />
+                      </IconButton>
+                    </div>
+                  </div>
+                ))}
+            </>
           ))}
-        </div>
-        <div className="orders-container">
-          <p className="fecha-mes">August 2020</p>
-          <div className="order-container">
-            <h2 className="titulo-pedido">Grocery List</h2>
-            <div className="datos_pedido-container">
-              <div className="fecha-compra-container">
-                <CalendarMonthIcon />
-                <p className="fecha-compra">Mon 27.8.2020</p>
-              </div>
-              <p className="estado estado-completed">completed</p>
-              <IconButton className="ver-detalle" sx={{ color: "#F9A109" }}>
-                <ArrowForwardIosIcon />
-              </IconButton>
-            </div>
-          </div>
-          <div className="order-container">
-            <h2 className="titulo-pedido">Grocery List</h2>
-            <div className="datos_pedido-container">
-              <div className="fecha-compra-container">
-                <CalendarMonthIcon />
-                <p className="fecha-compra">Mon 27.8.2020</p>
-              </div>
-              <p className="estado estado-cancelled">cancelled</p>
-              <IconButton className="ver-detalle" sx={{ color: "#F9A109" }}>
-                <ArrowForwardIosIcon />
-              </IconButton>
-            </div>
-          </div>
         </div>
       </div>
       <Cart cartState={"default"} setCartState={setCartState} />

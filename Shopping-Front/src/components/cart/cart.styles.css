@@ -72,6 +72,17 @@
     font-weight: 500;
 }
 
+.deleteCart {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.delete-button {
+    position: absolute;
+    right: 2rem;
+}
+
 .item-list {
     margin-top: 2.4rem;
 }

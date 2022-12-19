@@ -87,8 +87,12 @@ export const cartSlice = createSlice({
       if (cart) {
         state.items = JSON.parse(cart);
       }
+    },
+    cleanCart: state => {
+      localStorage.removeItem('cart');
+      state.items = [];
     }
   },
 });
 
-export const { addItemToCart, editQuantityItem, deleteItemCart, getItems } = cartSlice.actions;
+export const { addItemToCart, editQuantityItem, deleteItemCart, getItems, cleanCart } = cartSlice.actions;

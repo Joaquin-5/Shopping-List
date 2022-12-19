@@ -1,12 +1,13 @@
 import AddIcon from "@mui/icons-material/Add";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Box } from "@mui/material";
-import { useState } from "react";
+import { Box, IconButton } from "@mui/material";
+import { SetStateAction, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { deleteItemCart, editQuantityItem } from "../../store/cart";
+import { cleanCart, deleteItemCart, editQuantityItem } from "../../store/cart";
 import { startAddToList } from "../../store/history";
+import { CustomAlert } from "../alert/Alert";
 import { ItemButton } from "../itemButton";
 import { ItemsDetails } from "../itemDetails/ItemsDetails";
 import { AddItem } from "./addItem/AddItem";
@@ -25,8 +26,9 @@ export const Cart: React.FC<Props> = ({ cartState, setCartState }) => {
   const dispatch = useDispatch();
 
   const [nameList, setNameList] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
 
-  return (
+  return (  
     <>
       {cartState === "default" ? (
         <div className="cart-container" id="shopping-list">
@@ -55,7 +57,16 @@ export const Cart: React.FC<Props> = ({ cartState, setCartState }) => {
               </Box>
             ) : (
               <>
-                <h1>Shopping list</h1>
+                <div className="deleteCart">
+                  <h1>Shopping list</h1>
+                  <IconButton
+                    className="delete-button"
+                    onClick={() => setOpenDialog(true)}
+                    size="small"
+                  >
+                    <DeleteOutlineOutlinedIcon color="error"/>
+                  </IconButton>
+                </div>
                 {items.map((c) => (
                   <div className="item-list" key={c._id}>
                     <h2>{c.name}</h2>
@@ -96,16 +107,29 @@ export const Cart: React.FC<Props> = ({ cartState, setCartState }) => {
                 type="button"
                 value="Save"
                 className="input-submit"
-                disabled={items.length < 1}
-                onClick={() => dispatch(startAddToList(nameList, items!) as any)}
+                disabled={items.length < 1 || nameList.length < 1}
+                onClick={() => {
+                  dispatch(startAddToList(nameList, items!) as any);
+                  dispatch(cleanCart());
+                  setNameList("");
+                }}
               />
             </div>
           </div>
+          <CustomAlert
+            openDialog={openDialog}
+            setOpenDialog={setOpenDialog}
+            title={"Are you sure you want to delete all items on the cart?"}
+            onClick={() => {
+              dispatch(cleanCart());
+              setOpenDialog(false);
+            }}
+          />
         </div>
       ) : cartState === "addItem" ? (
         <AddItem setCartState={setCartState} />
       ) : (
-        <ItemsDetails setCartState={setCartState}/>
+        <ItemsDetails setCartState={setCartState} />
       )}
     </>
   );

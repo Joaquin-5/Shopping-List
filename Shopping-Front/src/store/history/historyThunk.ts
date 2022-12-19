@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { shoppingApi } from "../../api";
 import { Item, ShopCartCategory } from "../../interfaces";
-import { addList, getList } from "./historySlice";
+import { getList } from "./historySlice";
 
 export const startAddToList = (name: string, items: ShopCartCategory[]) => {
     return async (dispatch: Dispatch) => {
@@ -12,7 +12,7 @@ export const startAddToList = (name: string, items: ShopCartCategory[]) => {
             })
             console.log(response);
             
-            dispatch(addList(response.data));
+            // dispatch(addList(response.data));
         } catch (error) {
             console.log(error);
         }

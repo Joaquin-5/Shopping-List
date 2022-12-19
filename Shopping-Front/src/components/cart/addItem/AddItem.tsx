@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { shoppingApi } from "../../../api";
 import { Category } from "../../../interfaces";
 import { RootState } from "../../../store";
+import { CustomAlert } from "../../alert/Alert";
 import "./addItem.styles.css";
 
 interface Props {
@@ -63,14 +64,6 @@ export const AddItem: React.FC<Props> = ({ setCartState }) => {
       setOptions(cboCategoryOption);
     }
   }, []);
-
-  const handleClickOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -167,42 +160,23 @@ export const AddItem: React.FC<Props> = ({ setCartState }) => {
           <button
             className="cancel-button"
             type="button"
-            onClick={handleClickOpenDialog}
+            onClick={() => setOpenDialog(true)}
           >
             cancel
           </button>
           <input type="submit" value="Save" className="submit-button" />
         </div>
       </form>
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Are you sure you wanna cancel?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            You will loose all the information.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog}>Disagree</Button>
-          <Button
-            onClick={() => {
-              handleCloseDialog();
-              setCartState("default");
-            }}
-            autoFocus
-            color="error"
-            variant="contained"
-          >
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <CustomAlert
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+        title={"Are you sure you wanna cancel?"}
+        description={"You will loose all the information."}
+        onClick={() => {
+          setOpenDialog(false);
+          setCartState("default");
+        }}
+      />
     </div>
   );
 };
